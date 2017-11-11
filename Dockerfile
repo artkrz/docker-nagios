@@ -16,6 +16,9 @@ RUN apt-get update && apt-get install -y \
         unzip \
         curl
 
+# Clean APT cache
+RUN apt-get clean
+
 # Create user nad group
 RUN useradd nagios && \
     groupadd nagcmd && \
