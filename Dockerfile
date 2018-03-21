@@ -12,12 +12,22 @@ RUN apt-get update && apt-get install -y \
         php \
         apache2-mod-php7.0 \
         php-gd \
+        python \
+        python-pip \
         libgd-dev \
+        mailutils \
         unzip \
         curl
 
 # Clean APT cache
 RUN apt-get clean
+
+# Install PIP packages
+RUN pip install requests simplejson
+
+# Copy exim config
+COPY update-exim4.conf.conf /etc/exim4/update-exim4.conf.conf
+RUN /etc/init.d/exim4 restart
 
 # Create user nad group
 RUN useradd nagios && \
