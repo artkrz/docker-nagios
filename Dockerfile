@@ -2,32 +2,30 @@
 FROM debian:stable
 
 # Versions
-ENV NAGIOS_VERSION 4.3.4
+ENV NAGIOS_VERSION 4.4.2
 ENV NAGIOS_PLUGINS_VERSION 2.2.1
 
 # Apt
 RUN apt-get update && apt-get install -y \
-        build-essential \
         apache2 \
-        php \
         apache2-mod-php7.0 \
+        build-essential \
+        curl \
+        libcrypt-ssleay-perl \
+        libgd-dev \
+        libwww-perl \
+        php \
         php-gd \
         python \
         python-pip \
-        libgd-dev \
-        mailutils \
         unzip \
-        curl
+        wget
 
 # Clean APT cache
 RUN apt-get clean
 
 # Install PIP packages
 RUN pip install requests simplejson
-
-# Copy exim config
-COPY update-exim4.conf.conf /etc/exim4/update-exim4.conf.conf
-RUN /etc/init.d/exim4 restart
 
 # Create user nad group
 RUN useradd nagios && \
@@ -59,6 +57,9 @@ RUN curl https://nagios-plugins.org/download/nagios-plugins-$NAGIOS_PLUGINS_VERS
     ./configure --with-nagios-user=nagios --with-nagios-group=nagios && \
     make && \
     make install
+
+# Install Slack integration plugin
+RUN wget https://raw.github.com/tinyspeck/services-examples/master/nagios.pl && mv nagios.pl /usr/local/nagios/libexec/slack_nagios.pl && chmod 755 /usr/local/nagios/libexec/slack_nagios.pl
 
 # Entry point
 COPY ./docker-entrypoint.sh /
