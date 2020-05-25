@@ -2,13 +2,13 @@
 FROM debian:stable
 
 # Versions
-ENV NAGIOS_VERSION 4.4.2
-ENV NAGIOS_PLUGINS_VERSION 2.2.1
+ENV NAGIOS_VERSION 4.4.6
+ENV NAGIOS_PLUGINS_VERSION 2.3.3
 
 # Apt
 RUN apt-get update && apt-get install -y \
         apache2 \
-        apache2-mod-php7.0 \
+        apache2-mod-php7.3 \
         build-essential \
         curl \
         libcrypt-ssleay-perl \
