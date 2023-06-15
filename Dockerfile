@@ -13,6 +13,7 @@ RUN apt-get update && apt-get install -y \
         libapache2-mod-php \
         libcrypt-ssleay-perl \
         libgd-dev \
+        libssl-dev \
         libwww-perl \
         php \
         php-gd \
