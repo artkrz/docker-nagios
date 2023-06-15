@@ -35,16 +35,16 @@ WORKDIR /tmp
 RUN curl https://assets.nagios.com/downloads/nagioscore/releases/nagios-$NAGIOS_VERSION.tar.gz | tar zxv && \
     cd nagios-$NAGIOS_VERSION && \
     ./configure --with-command-group=nagcmd --with-mail=/usr/bin/sendmail --with-httpd-conf=/etc/apache2/conf-available/ && \
-    make all && \
+RUN make all && \
     make install && \
     make install-init && \
     make install-config && \
     make install-commandmode && \
     make install-webconf && \
-    cp -R contrib/eventhandlers/ /usr/local/nagios/libexec/ && \
+RUN cp -R contrib/eventhandlers/ /usr/local/nagios/libexec/ && \
     chown -R nagios:nagios /usr/local/nagios/libexec/eventhandlers && \
     /usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg && \
-    a2enconf nagios && \
+RUN a2enconf nagios && \
     a2enmod rewrite cgi &&\
     htpasswd -b -c /usr/local/nagios/etc/htpasswd.users nagiosadmin nagiosadmin
 
