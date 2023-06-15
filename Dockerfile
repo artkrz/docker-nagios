@@ -24,9 +24,6 @@ RUN apt-get update && apt-get install -y \
 # Clean APT cache
 RUN apt-get clean
 
-# Install PIP packages
-RUN pip3 install requests simplejson
-
 # Create user nad group
 RUN useradd nagios && \
     groupadd nagcmd && \
@@ -57,9 +54,6 @@ RUN curl https://nagios-plugins.org/download/nagios-plugins-$NAGIOS_PLUGINS_VERS
     ./configure --with-nagios-user=nagios --with-nagios-group=nagios && \
     make && \
     make install
-
-# Install Slack integration plugin
-RUN wget https://raw.github.com/tinyspeck/services-examples/master/nagios.pl && mv nagios.pl /usr/local/nagios/libexec/slack_nagios.pl && chmod 755 /usr/local/nagios/libexec/slack_nagios.pl
 
 # Entry point
 COPY ./docker-entrypoint.sh /
