@@ -16,8 +16,8 @@ RUN apt-get update && apt-get install -y \
         libwww-perl \
         php \
         php-gd \
-        python \
-        python-pip \
+        python3 \
+        python3-pip \
         unzip \
         wget
 
