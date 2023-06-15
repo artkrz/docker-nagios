@@ -8,7 +8,7 @@ ENV NAGIOS_PLUGINS_VERSION 2.4.4
 # Apt
 RUN apt-get update && apt-get install -y \
         apache2 \
-        apache2-mod-php7.3 \
+        apache2-mod-php \
         build-essential \
         curl \
         libcrypt-ssleay-perl \
