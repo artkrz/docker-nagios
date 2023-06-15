@@ -2,8 +2,8 @@
 FROM debian:stable
 
 # Versions
-ENV NAGIOS_VERSION 4.4.6
-ENV NAGIOS_PLUGINS_VERSION 2.3.3
+ENV NAGIOS_VERSION 5.10.0
+ENV NAGIOS_PLUGINS_VERSION 2.4.4
 
 # Apt
 RUN apt-get update && apt-get install -y \
