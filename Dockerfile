@@ -25,7 +25,7 @@ RUN apt-get update && apt-get install -y \
 RUN apt-get clean
 
 # Install PIP packages
-RUN pip install requests simplejson
+RUN pip3 install requests simplejson
 
 # Create user nad group
 RUN useradd nagios && \
